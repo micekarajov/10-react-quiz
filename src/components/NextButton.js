@@ -1,7 +1,9 @@
-function NextButton({ dispatch, answer, index, numQuestions }) {
+function NextButton({ dispatch, answer, index, numQuestions, questionCount }) {
     if (answer === null) return null;
 
-    if (index < numQuestions - 1)
+    const questionNumbers = questionCount ? questionCount : numQuestions;
+
+    if (index < questionNumbers - 1)
         return (
             <button
                 className="btn btn-ui"
@@ -11,7 +13,7 @@ function NextButton({ dispatch, answer, index, numQuestions }) {
             </button>
         );
 
-    if (index === numQuestions - 1)
+    if (index === questionNumbers - 1)
         return (
             <button
                 className="btn btn-ui"

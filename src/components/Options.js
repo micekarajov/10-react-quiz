@@ -1,6 +1,14 @@
-function Options({ question, dispatch, answer }) {
+function Options({
+    question,
+    displayedQuestions,
+    questionCount,
+    dispatch,
+    answer,
+}) {
     const hasAnswered = answer !== null;
-
+    const options = questionCount
+        ? displayedQuestions.options
+        : question.options;
     // console.log("Question", question);
     // console.log("Dispatch", dispatch);
     // console.log("Answer", answer);
@@ -8,7 +16,7 @@ function Options({ question, dispatch, answer }) {
     //*
     return (
         <div className="options">
-            {question.options.map((option, index) => (
+            {options.map((option, index) => (
                 <button
                     className={`btn btn-option 
                     ${index === answer ? "answer" : ""}    

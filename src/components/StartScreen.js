@@ -1,3 +1,5 @@
+// import DifficultMode from "./DifficultMode";
+
 function StartScreen({ numQuestions, questionCount, dispatch }) {
     //
     const updateDisplayedQuestion = function (e) {
@@ -9,9 +11,9 @@ function StartScreen({ numQuestions, questionCount, dispatch }) {
             type: "setQuestionsCount",
             payload: value,
         });
-        // dispatch({ type: "updateDisplayedQuestion" });
     };
-    //
+
+    //*
     return (
         <div className="start">
             <h2>Welcome to The React Quiz!</h2>
@@ -40,6 +42,7 @@ function StartScreen({ numQuestions, questionCount, dispatch }) {
                     </span>
                 )}
             </h5>
+            {/* <DifficultMode /> */}
 
             <button
                 className="btn btn-ui"

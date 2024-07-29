@@ -57,7 +57,7 @@ function reducer(state, action) {
                     action.payload === question.correctOption
                         ? state.points + question.points
                         : state.points,
-                // answersList: [...state.answerList, action.payload],
+                answersList: [...state.answerList, action.payload],
             };
 
         case "nextQuestion":
@@ -130,6 +130,7 @@ export default function App() {
     const [
         {
             questions,
+            displayedQuestions,
             questionCount,
             status,
             index,
@@ -181,9 +182,12 @@ export default function App() {
                             points={points}
                             maxPossiblePoints={maxPossiblePoints}
                             answer={answer}
+                            questionCount={questionCount}
                         />
                         <Question
                             question={questions[index]}
+                            displayedQuestions={displayedQuestions[index]}
+                            questionCount={questionCount}
                             dispatch={dispatch}
                             answer={answer}
                         />
@@ -200,6 +204,7 @@ export default function App() {
                                 answer={answer}
                                 index={index}
                                 numQuestions={numQuestions}
+                                questionCount={questionCount}
                             />
                         </Footer>
                     </>
