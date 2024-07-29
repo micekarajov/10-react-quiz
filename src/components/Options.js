@@ -5,8 +5,6 @@ function Options({ question, dispatch, answer }) {
     // console.log("Dispatch", dispatch);
     // console.log("Answer", answer);
 
-    console.log(question.correctOption);
-
     //*
     return (
         <div className="options">
