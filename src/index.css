@@ -1,4 +1,5 @@
 :root {
+    --color-262626: #262626;
     --color-darkest: #343a40;
     --color-dark: #495057;
     --color-medium: #ced4da;
@@ -68,13 +69,13 @@ h1 {
 
 h2 {
     font-size: 3.6rem;
-    margin-bottom: 2rem;
+    margin-bottom: 6rem;
 }
 
 h3 {
     font-size: 2.4rem;
     font-weight: 600;
-    margin-bottom: 4rem;
+    margin-bottom: 2rem;
 }
 
 h4 {
@@ -90,9 +91,9 @@ h5 {
 }
 
 label {
-    font-size: 2.2rem;
+    font-size: 2rem;
     font-weight: 600;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
 }
 
 .textDecoration {
@@ -142,10 +143,56 @@ progress {
     cursor: pointer;
     border-radius: 100px;
     transition: 0.3s;
+    margin: 0 2px;
+}
+
+.btn-start {
+    display: block;
+    font-family: inherit;
+    color: inherit;
+    font-size: 4rem;
+    border: 2px solid var(--color-dark);
+    background-color: var(--color-accent);
+    padding: 1.2rem 5rem;
+    cursor: pointer;
+    border-radius: 50px;
+    transition: 0.3s;
+    margin-bottom: 8rem;
+}
+
+.btn-back {
+    display: block;
+    font-family: inherit;
+    color: #262626;
+    font-size: 2rem;
+    border: 2px solid #262626;
+    background-color: var(--color-light);
+    padding: 1.2rem 2.4rem;
+    cursor: pointer;
+    border-radius: 100px;
+    transition: 0.3s;
+}
+
+.btn-upload {
+    display: block;
+    font-family: inherit;
+    color: #262626;
+    font-size: 2rem;
+    border: 2px solid #262626;
+    background-color: var(--color-accent);
+    padding: 1.2rem 2.4rem;
+    cursor: pointer;
+    border-radius: 100px;
+    transition: 0.3s;
+}
+
+.btn-questions {
+    font-size: 1.5rem;
 }
 
 .btn:not([disabled]):hover {
     background-color: var(--color-darkest);
+    color: #fff;
 }
 
 .btn-option:not([disabled]):hover {
@@ -158,6 +205,7 @@ progress {
 
 .btn-ui {
     float: right;
+    /* color: #fff; */
 }
 
 .options {
@@ -184,7 +232,7 @@ progress {
 }
 
 .answer {
-    transform: translateX(2rem);
+    transform: translateX(3rem);
 }
 
 .result {

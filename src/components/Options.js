@@ -1,17 +1,23 @@
+//
 function Options({
     question,
-    displayedQuestions,
+    displayedQuestion,
     questionCount,
     dispatch,
     answer,
+    selectedDifficult,
 }) {
     const hasAnswered = answer !== null;
-    const options = questionCount
-        ? displayedQuestions.options
-        : question.options;
-    // console.log("Question", question);
-    // console.log("Dispatch", dispatch);
-    // console.log("Answer", answer);
+
+    const questionCorrectOption =
+        displayedQuestion || selectedDifficult
+            ? displayedQuestion?.correctOption
+            : question?.correctOption;
+
+    const options =
+        displayedQuestion || selectedDifficult
+            ? displayedQuestion?.options
+            : question?.options;
 
     //*
     return (
@@ -21,14 +27,20 @@ function Options({
                     className={`btn btn-option 
                     ${index === answer ? "answer" : ""}    
                     ${
-                        hasAnswered && index === question.correctOption
-                            ? "correct"
-                            : "wrong"
-                    }`}
+                        hasAnswered
+                            ? index === questionCorrectOption
+                                ? "correct"
+                                : "wrong"
+                            : ""
+                    }
+                    `}
                     key={option}
                     disabled={hasAnswered}
                     onClick={() =>
-                        dispatch({ type: "newAnswer", payload: index })
+                        dispatch({
+                            type: "newAnswer",
+                            payload: index,
+                        })
                     }
                 >
                     {option}

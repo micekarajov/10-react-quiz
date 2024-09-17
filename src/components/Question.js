@@ -2,20 +2,30 @@ import Options from "./Options";
 
 function Question({
     question,
-    displayedQuestions,
+    displayedQuestion,
     questionCount,
     dispatch,
     answer,
+    userAnswers,
+    index,
+    selectedDifficult,
 }) {
+    const currentAnswer = userAnswers.length > 0 ? userAnswers[index] : answer;
+
     return (
         <div>
-            <h4>{question.question}</h4>
+            <h4>
+                {displayedQuestion || selectedDifficult
+                    ? displayedQuestion?.question
+                    : question.question}
+            </h4>
             <Options
                 question={question}
-                displayedQuestions={displayedQuestions}
+                displayedQuestion={displayedQuestion}
                 questionCount={questionCount}
                 dispatch={dispatch}
-                answer={answer}
+                answer={currentAnswer}
+                selectedDifficult={selectedDifficult}
             />
         </div>
     );

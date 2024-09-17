@@ -1,11 +1,21 @@
+import { useState } from "react";
+
 function FinishScreen({
     points,
     maxPossiblePoints,
+    maxPossiblePointsDifficultMode,
     highscore,
     dispatch,
     loading,
+    updateHighscore,
 }) {
-    const percentage = (points / maxPossiblePoints) * 100;
+    const [updateSuccess, setUpdateSuccess] = useState(false);
+    const percentage =
+        (points /
+            (maxPossiblePointsDifficultMode
+                ? maxPossiblePointsDifficultMode
+                : maxPossiblePoints)) *
+        100;
 
     let emoji;
     if (percentage === 100) emoji = "🥇";
@@ -14,53 +24,52 @@ function FinishScreen({
     if (percentage > 0 && percentage < 50) emoji = "Not bad, not terible ☹";
     if (percentage === 0) emoji = "🤕";
 
-    const handleUpload = async () => {
-        dispatch({ type: "uploadStart" });
-
-        try {
-            const response = await fetch("http://localhost:8000/question", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ highScore: highscore }),
-            });
-
-            if (!response.ok) {
-                throw new Error("Network response was not ok");
-            }
-
-            const result = await response.json();
-            console.log(result);
-            dispatch({ type: "UPLOAD_SUCCESS", payload: result });
-        } catch (error) {
-            dispatch({ type: "UPLOAD_ERROR", error: error.message });
+    const handleUpdateHighscore = async () => {
+        if (points > highscore) {
+            dispatch({ type: "setHighscore", payload: points });
+            await updateHighscore();
+            setUpdateSuccess(true);
         }
+    };
+
+    const handleRestartQuiz = async () => {
+        dispatch({ type: "restart" }); // Then restart the quiz
     };
 
     return (
         <>
             <p className="result">
                 <span>{emoji}</span> You scored <strong>{points}</strong> out of{" "}
-                {maxPossiblePoints} ({Math.ceil(percentage)}%)
+                {maxPossiblePointsDifficultMode
+                    ? maxPossiblePointsDifficultMode
+                    : maxPossiblePoints}{" "}
+                ({Math.ceil(percentage)}%)
             </p>
 
             <p className="highscore">(Highscore: {highscore} points)</p>
 
-            <button
-                className="btn btn-ui"
-                onClick={() => dispatch({ type: "restart" })}
-            >
+            <button className="btn" onClick={() => handleRestartQuiz()}>
                 Restart Quiz
             </button>
 
-            <h3>Upload High Score</h3>
+            <div className="">
+                <h4>Upload High Score</h4>
 
-            <button className="btn" onClick={handleUpload} disable={loading}>
-                {loading ? "Uploading..." : "Upload High Score"}
-            </button>
+                <button
+                    className="btn btn-upload"
+                    onClick={() => handleUpdateHighscore()}
+                >
+                    {loading ? "Uploading..." : "Upload High Score"}
+                </button>
+
+                {updateSuccess && (
+                    <h5>
+                        You sucessfully updated the High Score. Your game will
+                        restart now.
+                    </h5>
+                )}
+            </div>
         </>
     );
 }
-
 export default FinishScreen;

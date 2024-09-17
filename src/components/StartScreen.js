@@ -1,10 +1,8 @@
-// import DifficultMode from "./DifficultMode";
-
 function StartScreen({ numQuestions, questionCount, dispatch }) {
     //
     const updateDisplayedQuestion = function (e) {
         const value = Math.max(
-            5,
+            1,
             Math.min(numQuestions, Number(e.target.value))
         );
         dispatch({
@@ -25,15 +23,15 @@ function StartScreen({ numQuestions, questionCount, dispatch }) {
             </label>
             <input
                 id="questionCount"
-                className="btn btn-ui"
+                className="btn btn-ui btn-questions"
                 type="number"
-                placeholder="Enter number of questions"
+                placeholder="Number of questions"
                 value={questionCount || ""}
                 onChange={updateDisplayedQuestion}
             />
 
             <h5>
-                {questionCount <= 5 && "(minimum question to choose is 5)"}
+                {questionCount <= 1 && "(minimum question to choose is 1)"}
                 {questionCount > numQuestions && (
                     <span>
                         There are only{" "}
@@ -42,10 +40,9 @@ function StartScreen({ numQuestions, questionCount, dispatch }) {
                     </span>
                 )}
             </h5>
-            {/* <DifficultMode /> */}
 
             <button
-                className="btn btn-ui"
+                className="btn-start btn-ui"
                 onClick={() => dispatch({ type: "start" })}
             >
                 Let's start !!!

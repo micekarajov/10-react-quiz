@@ -1,25 +1,39 @@
 function Progress({
     index,
     numQuestions,
+    numDisplayedQuestions,
     points,
     maxPossiblePoints,
-    answer,
+    maxPossiblePointsDifficultMode,
     questionCount,
 }) {
     return (
         <header className="progress">
             <progress
-                max={questionCount ? questionCount : numQuestions}
+                max={
+                    numDisplayedQuestions
+                        ? numDisplayedQuestions
+                        : questionCount
+                        ? questionCount
+                        : numQuestions
+                }
                 value={index - 1}
             />
 
             <p>
                 Question <strong>{index}</strong> /{" "}
-                {questionCount ? questionCount : numQuestions}
+                {numDisplayedQuestions
+                    ? numDisplayedQuestions
+                    : questionCount
+                    ? questionCount
+                    : numQuestions}
             </p>
 
             <p>
-                <strong>{points}</strong> / {maxPossiblePoints}
+                <strong>{points}</strong> /{" "}
+                {maxPossiblePointsDifficultMode
+                    ? maxPossiblePointsDifficultMode
+                    : maxPossiblePoints}
             </p>
         </header>
     );
